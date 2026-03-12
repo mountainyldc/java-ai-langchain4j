@@ -1,0 +1,20 @@
+package com.atguigu.java.ai.langchain4j;
+
+import com.atguigu.java.ai.langchain4j.assistant.Assistant;
+import dev.langchain4j.community.model.dashscope.QwenChatModel;
+import dev.langchain4j.service.AiServices;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+public class AIServiceTest {
+    @Autowired
+    private QwenChatModel qwenChatModel;
+    @Test
+    public void testChat(){
+        Assistant assistant = AiServices.create(Assistant.class, qwenChatModel);
+        String answer = assistant.chat("java面试怎么通过");
+        System.out.println(answer);
+    }
+}
