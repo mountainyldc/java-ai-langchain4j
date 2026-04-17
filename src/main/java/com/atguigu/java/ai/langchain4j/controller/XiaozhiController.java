@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 
 @Tag(name = "硅谷小智")
 @RestController
@@ -15,12 +16,8 @@ public class XiaozhiController {
     private XiaoZhiAgent xiaoZhiAgent;
 
     @Operation(summary = "对话")
-    @PostMapping("/chat")
-    public String chat(@RequestBody ChatForm chatForm){
-        // 参数校验，防止空消息
-        if (chatForm.getMessage() == null || chatForm.getMessage().trim().isEmpty()) {
-            return "消息不能为空";
-        }
+    @PostMapping(value = "/chat", produces = "text/stream;charset=utf-8")
+    public Flux<String> chat(@RequestBody ChatForm chatForm){
         return xiaoZhiAgent.chat(chatForm.getMemoryId(), chatForm.getMessage());
     }
 }
