@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 
-@Tag(name = "硅谷小智")
+@Tag(name = "Lind-AI医疗助手")
 @RestController
 @RequestMapping("/xiaozhi")
 public class XiaozhiController {
